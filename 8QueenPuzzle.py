@@ -20,7 +20,7 @@ import numpy as np
 
 # Define funtion on population
 def random_chromosome(size): #making random chromosomes
-    return [random.randint(1, n) for _ in range(n)]
+    return [random.randint(0, size-1) for _ in range(size)]
 
 
 # Define Fitness Function
@@ -73,7 +73,7 @@ def reproduce(x, y): #doing cross_over between two chromosomes
 def mutate(x):  #randomly changing the value of a random index of a chromosome
     n = len(x)
     c = random.randint(0, n - 1)
-    m = random.randint(1, n)
+    m = random.randint(0, n-1)
     x[c] = m
     return x
 
@@ -99,7 +99,7 @@ def print_chromosome(chrom):
 if __name__ == "__main__":
     n = int(input("Enter Number of Queens: "))
     maxFitness = (n * (n - 1)) / 2  # 8*7/2 = 28
-    population = [random_chromosome(n) for _ in range(1000)]
+    population = [random_chromosome(n) for _ in range(0,1000)]
     mutation_probability = 0.04
     generation = 1
 
@@ -117,6 +117,9 @@ if __name__ == "__main__":
             print("One of the solutions: ")
             chrom_out = chrom
             print_chromosome(chrom)
+
+    for i in range(n):
+        chrom_out[i]+=1
 
     board = []
 
